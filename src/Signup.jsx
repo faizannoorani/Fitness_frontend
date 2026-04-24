@@ -8,7 +8,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'; 
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';  
+
+const API = process.env.REACT_APP_API_URL;
 
 function Signup() {
   const navigate = useNavigate();
@@ -33,7 +35,7 @@ function Signup() {
 
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:8000/api/signup/', {
+      const res = await axios.post(`${API}/api/signup/`, {
         username: formData.username,
         email: formData.email,
         password: formData.password,
@@ -45,6 +47,7 @@ function Signup() {
       navigate(`/verify-otp/${userId}`);
 
     } catch (err) {
+      console.log("API URL:", API);
       alert(err.response?.data?.message || err.response?.data?.error || 'Signup fail hua, dobara try karo');
     } finally {
       setLoading(false);
