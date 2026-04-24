@@ -28,7 +28,7 @@ function VerifyOtp() {
     console.log("otp:", otp)
     setLoading(true);
     try {
-      const res = await axios.post(`http://localhost:8000/api/verify-otp/${userId}/`, { otp });
+      const res = await axios.post(`${API}/api/verify-otp/${userId}/`, { otp });
       alert(res.data.message || 'OTP verified!');
       navigate('/dashboard'); // jahan bhi jana ho
     } catch (err) {
